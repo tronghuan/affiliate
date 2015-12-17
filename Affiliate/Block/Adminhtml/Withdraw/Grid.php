@@ -7,7 +7,7 @@ class HN_Affiliate_Block_Adminhtml_Withdraw_Grid extends Mage_Adminhtml_Block_Wi
 		$this->setSaveParametersInSession ( true );
 	}
 	protected function _prepareCollection() {
-		$collection = Mage::getModel ( 'affiliate/withdraw' )->getCollection ();
+		$collection = Mage::getModel ( 'affiliate/withdrawal' )->getCollection ();
 		//$collection->getSelect ()->where ( 'main_table.account_id = ?', $this->getRequest ()->getParam ( 'id' ) );
 		$this->setCollection ( $collection );
 		

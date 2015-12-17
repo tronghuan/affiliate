@@ -6,6 +6,6 @@ class HN_Affiliate_Model_Resource_Withdraw_Collection extends Mage_Core_Model_Re
 	 */
 	protected function _construct()
 	{
-		$this->_init('affiliate/withdraw');
+		$this->_init('affiliate/withdrawal');
 	}
 }

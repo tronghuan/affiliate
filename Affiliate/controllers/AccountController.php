@@ -139,7 +139,7 @@ class HN_Affiliate_AccountController extends Mage_Core_Controller_Front_Action {
 		
 		if (! isset ( $params ['amount'] ) || $params ['amount'])
 			
-			$withdraw = Mage::getModel ( 'affiliate/withdraw' )->setAmount ( $params ['amount'] )
+			$withdraw = Mage::getModel ( 'affiliate/withdrawal' )->setAmount ( $params ['amount'] )
 		->setData('comment' , $params['comment']) ->setCreatedTime ( now () ) 
 		->setData('account_id', $account_id)
 		->setData('status',0)
