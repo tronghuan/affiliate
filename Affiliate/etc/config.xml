@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<HN_Affiliate>
+			<version>0.1.0</version>
+		</HN_Affiliate>
+	</modules>
+
+	<global>
+
+		<blocks>
+			<affiliate>
+				<class>HN_Affiliate_Block</class>
+			</affiliate>
+
+
+		</blocks>
+		<helpers>
+			<affiliate>
+				<class>HN_Affiliate_Helper</class>
+			</affiliate>
+		</helpers>
+
+		<models>
+			<affiliate>
+				<class>HN_Affiliate_Model</class>
+				<resourceModel>affiliate_resource</resourceModel>
+			</affiliate>
+			<affiliate_resource>
+				<class>HN_Affiliate_Model_Resource</class>
+				<deprecatedNode>affiliate_mysql4</deprecatedNode>
+				<entities>
+					<account>
+						<table>hn_affiliate_account</table>
+					</account>
+					<program>
+						<table>hn_affiliate_program</table>
+					</program>
+
+					<banner>
+						<table>hn_affiliate_banner</table>
+					</banner>
+					<transaction>
+						<table>hn_affiliate_transaction</table>
+					</transaction>
+					<withdrawal>
+						<table>hn_affiliate_withdrawal</table>
+					</withdrawal>
+					<report>
+						<table>hn_affiliate_report</table>
+					</report>
+				</entities>
+			</affiliate_resource>
+		</models>
+
+		<resources>
+			<affiliate_setup>
+				<setup>
+					<module>HN_Affiliate</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</affiliate_setup>
+			<affiliate_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</affiliate_write>
+			<affiliate_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</affiliate_read>
+		</resources>
+
+		<template>
+			<email>
+				<affiliate_information_template>
+					<label>Game licenses information</label>
+					<file>affiliate_info.html</file>
+					<type>html</type>
+				</affiliate_information_template>
+
+				<low_affiliatestock_template>
+					<label>PIN Low stock notification</label>
+					<file>affiliate_low_stock_notification.html</file>
+					<type>html</type>
+				</low_affiliatestock_template>
+			</email>
+		</template>
+		<events>
+			<controller_front_init_before>
+				<observers>
+					<affiliate_observer>
+						<class>affiliate/observer</class>
+						<method>captureReferral</method>
+					</affiliate_observer>
+				</observers>
+			</controller_front_init_before>
+
+			<!-- <sales_order_item_save_commit_after> -->
+			<!-- <observers> -->
+			<!-- <affiliate_observer> -->
+			<!-- <class>affiliate/observer</class> -->
+			<!-- <method>saveAffiliateOrderItem</method> -->
+			<!-- </affiliate_observer> -->
+			<!-- </observers> -->
+			<!-- </sales_order_item_save_commit_after> -->
+			<sales_order_save_commit_after>
+				<observers>
+					<affiliate_observer>
+						<class>affiliate/observer</class>
+						<method>orderCommitListener</method>
+					</affiliate_observer>
+				</observers>
+			</sales_order_save_commit_after>
+		</events>
+
+	</global>
+
+
+	<frontend>
+		<routers>
+			<affiliate>
+				<use>standard</use>
+				<args>
+					<module>HN_Affiliate</module>
+					<frontName>affiliate</frontName>
+				</args>
+			</affiliate>
+
+		</routers>
+		<layout>
+			<updates>
+				<affiliate>
+					<file>hn_affiliate.xml</file>
+				</affiliate>
+			</updates>
+		</layout>
+	</frontend>
+
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<affiliate before="Mage_Adminhtml">HN_Affiliate_Adminhtml</affiliate>
+					</modules>
+				</args>
+			</adminhtml>
+			<affiliate>
+				<use>admin</use>
+				<args>
+					<module>HN_Affiliate</module>
+					<frontName>affiliate</frontName>
+				</args>
+			</affiliate>
+		</routers>
+	</admin>
+	<adminhtml>
+		<menu>
+			<affiliate module="affiliate">
+				<title>Affiliate</title>
+				<sort_order>171</sort_order>
+				<children>
+					<items module="affiliate">
+						<title>Program Rules</title>
+						<sort_order>0</sort_order>
+						<action>affiliate/adminhtml_program/index</action>
+					</items>
+					<order module="affiliate">
+						<title>Affiliates Account</title>
+						<sort_order>0</sort_order>
+						<action>affiliate/adminhtml_affiliate/index</action>
+					</order>
+					<affiliateproduct translate="title" module="catalog">
+						<title>Withdrawals</title>
+						<action>affiliate/adminhtml_withdraw/index/</action>
+					</affiliateproduct>
+				</children>
+			</affiliate>
+		</menu>
+		<layout>
+			<updates>
+				<affiliate>
+					<file>hn_affiliate.xml</file>
+				</affiliate>
+			</updates>
+		</layout>
+
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<affiliate translate="title" module="affiliate">
+											<title>Affiliates Settings</title>
+										</affiliate>
+									</children>
+								</config>
+							</children>
+						</system>
+						<affiliate module="affiliate">
+							<title>Affiliate</title>
+							<sort_order>171</sort_order>
+							<children>
+								<items module="affiliate">
+									<title>Program Rules</title>
+									<sort_order>0</sort_order>
+									<action>affiliate/adminhtml_program/index</action>
+								</items>
+								<order module="affiliate">
+									<title>Affiliates Account</title>
+									<sort_order>0</sort_order>
+									<action>affiliate/adminhtml_affiliate/index</action>
+								</order>
+								<affiliateproduct translate="title" module="catalog">
+									<title>Withdrawals</title>
+									<action>affiliate/adminhtml_withdraw/index/</action>
+								</affiliateproduct>
+							</children>
+						</affiliate>
+					</children>
+
+
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+	<default>
+		<affiliate>
+			<general>
+				<cookie_lifetime>30</cookie_lifetime>
+				<email_sender>sales</email_sender>
+				<qty_sync>1</qty_sync>
+				<delivery_confirmed>0</delivery_confirmed>
+				<low_stock_notification>1</low_stock_notification>
+				<low_stock_number>10</low_stock_number>
+				<show_affiliate_successpage>1</show_affiliate_successpage>
+			</general>
+		</affiliate>
+
+	</default>
+	<crontab>
+		<jobs>
+			<notification_low_affiliate>
+				<schedule>
+					<cron_expr>*/5 * * * *</cron_expr>
+				</schedule>
+				<run>
+					<model>affiliate/observer::scheduledSend</model>
+				</run>
+			</notification_low_affiliate>
+		</jobs>
+	</crontab>
+
+</config>

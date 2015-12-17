@@ -1,0 +1,3 @@
+DROP TABLE `hn_affiliate_account`, `hn_affiliate_program`, `hn_affiliate_transaction`, `hn_affiliate_withdrawal`;
+ALTER TABLE `salesrule` DROP `is_affiliate`, DROP `program_id`;
+DELETE FROM `core_resource` WHERE `core_resource`.`code` = 'affiliate_setup';
