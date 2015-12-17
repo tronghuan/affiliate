@@ -7,7 +7,7 @@ class HN_Affiliate_Model_Resource_Withdraw  extends Mage_Core_Model_Resource_Db_
 	*/
 	protected function _construct()
 	{
-		$this->_init('affiliate/withdrawal', 'id');
+		$this->_init('affiliate/withdraw', 'id');
 	}
 
 	

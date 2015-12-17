@@ -7,7 +7,7 @@ class HN_Affiliate_Block_Account_Mywithdraw extends Mage_Core_Block_Template {
 		$customerId =  Mage::getSingleton('customer/session')->getCustomer()->getId();
 		$affiliate_account_ids = Mage::getResourceModel('affiliate/account')->getDetailByCustomerId($customerId);
 		$affiliate_account_id = $affiliate_account_ids[0]['id'];
-		$collection = Mage::getModel('affiliate/withdrawal')->getCollection()->addFilter('account_id',$affiliate_account_id);
+		$collection = Mage::getModel('affiliate/withdraw')->getCollection()->addFilter('account_id',$affiliate_account_id);
 		//$collection = Mage::getModel('affiliate/withdraw')->getCollection()->addFilter('customer_id', $customerId);
 		/* @var $collection Varien_Data_Collection */
 		$this->setCollection($collection);

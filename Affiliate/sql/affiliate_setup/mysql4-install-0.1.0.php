@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS {$this->getTable('affiliate/program')} (
   `rate_calculation_type` int(11) NOT NULL,
   `detail` text,
   `rate_amount` decimal(10,2) NOT NULL,
-   PRIMARY KEY (`program_id`)
+   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS {$this->getTable('affiliate/transaction')} (

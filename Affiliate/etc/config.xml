@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<HN_Affiliate>
-			<version>0.1.0</version>
+			<version>2.0.2</version>
 		</HN_Affiliate>
 	</modules>
 
@@ -43,9 +43,9 @@
 					<transaction>
 						<table>hn_affiliate_transaction</table>
 					</transaction>
-					<withdrawal>
+					<withdraw>
 						<table>hn_affiliate_withdrawal</table>
-					</withdrawal>
+					</withdraw>
 					<report>
 						<table>hn_affiliate_report</table>
 					</report>
@@ -149,13 +149,6 @@
 					</modules>
 				</args>
 			</adminhtml>
-			<affiliate>
-				<use>admin</use>
-				<args>
-					<module>HN_Affiliate</module>
-					<frontName>affiliate</frontName>
-				</args>
-			</affiliate>
 		</routers>
 	</admin>
 	<adminhtml>
